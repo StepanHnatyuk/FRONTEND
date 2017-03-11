@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+    var age=prompt("Введіть ваш вік");
+    if (isNumeric(age)!=true || age<0){
+        document.write("Невірний формат введення <br>");
+       }
+    else {
+        var a = parseInt(age);
+        if (0 < age && age < 18) {
+            document.write("Вам ще рано вживати алкоголь");
+        }
+        else if (18 < age && age < 65) {
+            document.write("Вам можна вживати алкоголь");
+        }
+        else {
+            document.write("Побережіть здоровя!!!")
+        }
+    }
+</script>
+<body>
+
+</body>
+</html>

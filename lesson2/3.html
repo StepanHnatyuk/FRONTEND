@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    var a=prompt("Введіть перше число");
+    if (isNaN(a)){
+        document.write("Невірний формат введення першого числа <br>");
+    }
+    var op=prompt("Введіть оператор");
+    if (op=="*"||op=="/"||op=="+"||op=="-"||op=="%") {
+        var b = prompt("Введіть друге число");
+        if (isNaN(b)){
+            document.write("Невірний формат введення другого числа <br>");
+        }
+    }
+    else if (op=="^"){
+        var b = prompt("Введіть степінь числа");
+        if (isNaN(b)){
+            document.write("Невірний формат введення степені числа <br>");
+        }
+    }
+    else {
+        document.write("Невірний оператор <br>");
+    }
+    var a=parseFloat(a);
+    var b=parseFloat(b);
+    if (b==0 && op=="/"){
+            document.write("Помилка. Ділення на 0")
+     }
+
+    else {
+        switch (op){
+            case "+": document.write(a+b);break;
+            case "-": document.write(a-b);break;
+            case "*": document.write(a*b);break;
+            case "/": document.write(a/b);break;
+            case "%": document.write(a%b);break
+            case "^": document.write(Math.pow(a,b));break
+        }
+    }
+
+</script>
+<body>
+
+</body>
+</html>

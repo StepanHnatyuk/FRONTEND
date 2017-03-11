@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+        var v0=prompt("Введіть початкову швидкість, м/с", "Початкова швидкість");
+        if (isNumeric(v0)!=true){
+            document.write("Невірний формат введення v0 <br>");
+             }
+
+        var t=prompt("Введіть час вільного падіння, с", "Час вільного падіння");
+        if (isNumeric(v0)!=true){
+            document.write("Невірний формат введення t <br>");
+        }
+
+        var g=9.8;
+        var h=v0*t+g*t*t/2;
+        document.write("Відстань, що пролетить обєкт рівна  "+h+" м" );
+    </script>
+</head>
+<body>
+
+</body>
+</html>
