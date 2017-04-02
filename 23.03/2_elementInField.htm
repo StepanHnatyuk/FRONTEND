@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Перетаскивание элементов документа</title>
+    <script type="text/javascript">
+
+        window.onload=function () {
+            var elem = document.getElementById("sq");
+            elem.addEventListener("mousedown", function (e) {
+                drag(this, e);
+            })
+
+
+            function drag(elementToDrag, event) {
+
+                // координаты мыши в начале перетаскивания.
+                var startX = event.clientX,
+                    startY = event.clientY;
+
+                // начальные координаты элемента, который будет перемещаться.
+                var origX = elementToDrag.offsetLeft,
+                    origY = elementToDrag.offsetTop;
+
+                // разница между координатами мыши и координатами перетаскиваемого элемента.
+                var deltaX = startX - origX,
+                    deltaY = startY - origY;
+
+
+
+                // Регистрация событий mouseup и mousemove
+                document.addEventListener("mousemove", moveHandler, true);
+                document.addEventListener("mouseup", upHandler, true);
+
+                function moveHandler(e) {
+                    if (!e) e = window.event;
+
+                    // перемещаем элемент с учетом отступа от первоначального клика.
+                    elementToDrag.style.left = (e.clientX - deltaX) + "px";
+                    elementToDrag.style.top = (e.clientY - deltaY) + "px";
+
+                    var field = document.getElementById("field");
+                    var fieldCoords = field.getBoundingClientRect();
+
+
+                    // вылезает за границу - разместить по ней
+                    if (parseInt(elementToDrag.style.top)<0) {
+                        elementToDrag.style.top = 0;
+                        field.style.borderColor="red";
+                    }
+
+                    if (parseInt(elementToDrag.style.left)<0) {
+                        elementToDrag.style.left = 0;
+                        field.style.borderColor="red";
+                    }
+
+                    if (parseInt(elementToDrag.style.top)>(field.clientHeight-elementToDrag.clientHeight)) {
+                        elementToDrag.style.top = (field.clientHeight - elementToDrag.clientHeight) + 'px';
+                        field.style.borderColor="red";
+                    }
+                    if (parseInt(elementToDrag.style.left)>(field.clientWidth-elementToDrag.clientWidth)) {
+                        elementToDrag.style.left = (field.clientWidth - elementToDrag.clientWidth) + 'px';
+                        field.style.borderColor = "red";
+                    }
+
+                    // граница красная, а прямоугольник на поле
+                    if ( field.style.borderColor == "red" && parseInt(elementToDrag.style.top)>0 && parseInt(elementToDrag.style.left)>0
+                        && parseInt(elementToDrag.style.top)<(field.clientHeight-elementToDrag.clientHeight)
+                        && parseInt(elementToDrag.style.left)<(field.clientWidth-elementToDrag.clientWidth)){
+                            field.style.borderColor = "black";
+                        }
+                }
+
+                function upHandler(e) {
+                    if (!e) e = window.event;
+                    document.removeEventListener("mouseup", upHandler, true);
+                    document.removeEventListener("mousemove", moveHandler, true);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="field" style="position: relative; margin: 100px; margin-top: 40px; padding: 0px; height: 400px;
+                width: 400px;overflow: hidden; border: 10px solid black;">
+        <div id="sq" style="position: absolute;left:40px;top:40px; margin:0px;padding: 0px ; height: 50px; width: 50px; background-color: Green;">
+
+        </div>
+
+    </div>
+
+</body>
+</html>
